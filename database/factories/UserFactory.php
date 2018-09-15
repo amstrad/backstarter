@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     }
 
     return [
-        'name' => $faker->firstName,
+        'name' => $faker->firstName(),
         'lastname' => $faker->lastName,
         'username' => $faker->userName,
         'email' => $faker->unique()->safeEmail,
@@ -33,6 +33,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'description' => $faker->text(30),
         'active' => $faker->randomFloat(1, 0, 1),
         'idrol' => 2,
-        'image' => $faker->imageUrl(400, 300)
+        'image' => $faker->image('public/storage/images', 180, 180, null, false)
     ];
 });

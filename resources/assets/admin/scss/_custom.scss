@@ -9,11 +9,6 @@ form.app-search .form-control[type=text] {
   margin-top: 0;
 }
 
-.table tr:hover {
-  opacity: 0.9;
-  transition: all 0.1s;
-}
-
 .pagination {
   .page-link {
     outline: none;
@@ -71,6 +66,18 @@ form.app-search .form-control[type=text] {
     color: $warning;
     text-shadow: 0 0 8px #fff;
   }
+
+  .table {
+    a {
+      color: $pink
+    }
+    tr:hover {
+      opacity: 0.9;
+      transition: all 0.1s;
+    }
+  }
+
 }
+
 
 

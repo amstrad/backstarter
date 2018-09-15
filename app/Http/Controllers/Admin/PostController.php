@@ -17,8 +17,10 @@ class PostController extends Controller
         $search = $request->search;
 
 
-        if($request->page){
+        if ($request->page > 0) {
             $currentPage = $request->page;
+        } else {
+            $currentPage = 1;
         }
 
 
@@ -30,8 +32,8 @@ class PostController extends Controller
                         'posts.created_at',
                         'posts.active',
                         'posts.image',
-                        'categories.name AS category
-                ')
+                'categories.name AS category'
+            )
             ->when($request->search, function($query) use ($request){
                 return $query
                     ->where('posts.name','like', '%'.$request->search.'%')
@@ -43,13 +45,13 @@ class PostController extends Controller
         $data = array(
             'pagination' => [
                 'page-count'        => $posts->total(),
-                'current_page' => $posts->currentPage(),
-                'page-range'     => $posts->perPage(),
+                'current_page' => $currentPage,
+                'page-range' => $posts->perPage(),
                 'last_page'    => $posts->lastPage(),
                 'from'         => $posts->firstItem(),
                 'to'           => $posts->lastItem(),
             ],
-            'posts' => $posts
+            'items' => $posts
         );
 
         if (!$request->ajax()) {
@@ -59,7 +61,9 @@ class PostController extends Controller
         }
 
     }
-    public function editPost(Request $request, $id = null){
+
+    public function edit(Request $request, $id = null)
+    {
         //get single post if ID
 
         $data = array(
@@ -72,6 +76,7 @@ class PostController extends Controller
 
             $data['post']= $post->toArray();
 
+       
             if(!empty($post->image)){
                 $data['post']['image'] = asset($post->image);
             }

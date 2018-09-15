@@ -53,10 +53,17 @@
                 </li>
 
                 <li>
-                    <router-link tag="a" :to="{ name: 'ListPosts' }" class="waves-effect">
+                    <router-link tag="a" :to="{ name: 'ListPosts'}" class="waves-effect">
                         <i class="ti  ti-pin-alt"></i> <span> Posts </span>
                     </router-link>
                 </li>
+
+                <li>
+                    <router-link tag="a" :to="{ name: 'ListUsers'}" class="waves-effect">
+                        <i class="ti   ti-user"></i> <span> Users </span>
+                    </router-link>
+                </li>
+
 
                 {{--      <li>
                           <a href="" class="waves-effect"><i class="ti ti-bookmark"></i>

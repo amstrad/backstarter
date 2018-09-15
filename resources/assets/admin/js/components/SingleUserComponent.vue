@@ -1,5 +1,5 @@
 <template>
-    <div class="SinglePostComponent">
+    <div class="SingleitemComponent">
         <vue-snotify/>
 
         <div>
@@ -13,16 +13,16 @@
                             <div class="form-group row">
                                 <label for="name" class="col-3 col-form-label">Name</label>
                                 <div class="col-9">
-                                    <input v-model="post.name" type="text" class="form-control" id="name"
+                                    <input v-model="item.name" type="text" class="form-control" id="name"
                                            placeholder="Name">
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="idcategory" class="col-3 col-form-label">Category</label>
+                                <label for="idrol" class="col-3 col-form-label">Rol</label>
                                 <div class="col-9">
-                                    <select id="idcategory" class="form-control" v-model="post.idcategory">
-                                        <option v-for="categorie in categories" :value="categorie.id">{{ categorie.name
+                                    <select id="idrol" class="form-control" v-model="item.idrol">
+                                        <option v-for="rol in roles" :value="rol.id">{{ rol.name
                                             }}
                                         </option>
                                     </select>
@@ -34,7 +34,7 @@
                                 <label for="description" class="col-3 col-form-label">Description</label>
                                 <div class="col-9">
                                     <div class="">
-                                        <vue-editor v-model="post.description"></vue-editor>
+                                        <vue-editor v-model="item.description"></vue-editor>
                                     </div>
 
                                 </div>
@@ -63,6 +63,7 @@
                     <div class="col-md-4">
                         <div class="card-box">
 
+
                             <picture-input
                                     ref="pictureInput"
                                     width="600"
@@ -71,7 +72,7 @@
                                     accept="image/jpeg,image/png"
                                     size="10"
                                     button-class="btn"
-                                    :prefill="post.image"
+                                    :prefill="item.image"
                                     :custom-strings="{
                                         upload: '<h1>Uploaded</h1>',
                                         drag: '<h2><i class=\'ti-cloud-up ti\'></i></h2> Drag Image Here'
@@ -105,14 +106,14 @@
 
 
     export default {
-        name: "SinglePostComponent",
+        name: "SingleUserComponent",
         components: {},
         data() {
             return {
                 id: null,
-                post: {},
+                item: {},
                 switch: false,
-                categories: [],
+                roles: [],
                 file: '',
                 showPreview: false,
                 imagePreview: '',
@@ -134,9 +135,9 @@
             fetch(id = null) {
                 axios.get(this.endpoint + this.id)
                     .then(({data}) => {
-                        if (data.post) {
-                            this.post = data.post;
-                            this.switch = this.post.active == 1 ? true : false;
+                        if (data.item) {
+                            this.item = data.item;
+                            this.switch = this.item.active == 1 ? true : false;
                         }
 
                         this.categories = data.categories;
@@ -149,11 +150,11 @@
                 let me = this;
                 let formData = new FormData();
 
-                formData.append('id', this.post.id);
-                formData.append('name', this.post.name);
-                formData.append('description', this.post.description);
-                formData.append('active', this.post.active);
-                formData.append('idcategory', this.post.idcategory);
+                formData.append('id', this.item.id);
+                formData.append('name', this.item.name);
+                formData.append('description', this.item.description);
+                formData.append('active', this.item.active);
+                formData.append('idcategory', this.item.idcategory);
 
                 formData.append('image', this.file);
 
@@ -189,9 +190,9 @@
             modifyActive(state) {
 
                 if (state.value == true) {
-                    this.post.active = 1;
+                    this.item.active = 1;
                 } else {
-                    this.post.active = 0;
+                    this.item.active = 0;
                 }
             },
 

@@ -21,6 +21,8 @@ import PictureInput from 'vue-picture-input'; //https://github.com/alessiomaffei
 import DashboardComponent from './components/DashboardComponent';
 import PostsComponent from './components/PostsComponent';
 import SinglePostComponent from './components/SinglePostComponent';
+import UserComponent from './components/UsersComponent';
+import SingleUserComponent from './components/SingleUserComponent';
 
 Vue.component('paginate', Paginate); // paginator
 Vue.component('picture-input', PictureInput); // image drag drop
@@ -36,13 +38,15 @@ Vue.config.productionTip = false
 const router = new VueRouter({
     mode: 'history',
     routes: [
+        //dashboard
         {
             path: '/admin',
             name: 'DashboardComponent',
             component: DashboardComponent
         },
+        //posts
         {
-            path: '/admin/posts',
+            path: '/admin/posts/:page?',
             name: 'ListPosts',
             component: PostsComponent,
         },
@@ -50,6 +54,17 @@ const router = new VueRouter({
             path: '/admin/posts/single/:id?',
             name: 'SinglePost',
             component: SinglePostComponent,
+        },
+        //users
+        {
+            path: '/admin/users/:page?',
+            name: 'ListUsers',
+            component: UserComponent,
+        },
+        {
+            path: '/admin/users/single/:id?',
+            name: 'SingleUser',
+            component: SingleUserComponent,
         },
     ],
 });
@@ -61,6 +76,7 @@ const app = new Vue({
     data: {
         menu: 0,
         pagination: [],
+        app_url: window.location.origin + '/admin/',
     },
     created() {
         let me = this;
@@ -69,5 +85,7 @@ const app = new Vue({
         DashboardComponent,
         PostsComponent,
         SinglePostComponent,
+        UserComponent,
+        SingleUserComponent
     }
 });

@@ -11,11 +11,11 @@
                     <div class="col-md-6">
                         <div class="row  m-b-30 ">
                             <div class="col-md-3">
-                                <h4 class="header-title m-t-10"> Posts</h4>
+                                <h4 class="header-title m-t-10"> Users</h4>
                             </div>
                             <div class="col-md-8">
                                 <form class="app-search" s>
-                                    <input v-on:input="fetch"  v-model="search" type="text" placeholder="Search..."
+                                    <input v-on:input="fetch" v-model="search" type="text" placeholder="Search..."
                                            class="form-control">
                                     <button type="submit"><i class="fa fa-search"></i></button>
 
@@ -40,10 +40,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Project Name</th>
-                            <th>Status</th>
-                            <th>Category</th>
-                            <th>Date</th>
+                            <th>Email</th>
+                            <th>Active</th>
+                            <th>Name</th>
+                            <th>Lastname</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -51,9 +51,9 @@
                         <tr v-for="row in rows">
                             <td>{{ row.id }}</td>
                             <td>
-                                <router-link tag="a" :to="{ name: 'SinglePost', params: { id: row.id } }"
+                                <router-link tag="a" :to="{ name: 'SingleUser', params: { id: row.id } }"
                                              class="waves-effect">
-                                    {{ row.name }}
+                                    {{ row.email }}
                                 </router-link>
                             </td>
                             <td>
@@ -64,7 +64,10 @@
                                     <span class="badge badge-danger">Not Active</span>
                                 </div>
                             </td>
-                            <td>{{ row.category }}</td>
+
+
+                            <td>{{ row.name }}</td>
+                            <td>{{ row.lastname }}</td>
                             <td>{{ row.created_at }}</td>
                             <td>
                                 <router-link tag="button" :to="{ name: 'SinglePost', params: { id: row.id } }"
@@ -113,15 +116,15 @@
 <script>
     export default {
 
-        name: "PostsComponent",
-        route_name: 'ListPosts',
+        name: "UsersComponent",
+        route_name: 'ListUsers',
         data() {
             return {
                 rows: [],
                 page: 1,
                 pageCount: 1,
                 search: '',
-                endpoint: this.$parent.app_url + 'posts/'
+                endpoint: this.$parent.app_url + 'users/'
             };
         },
         created() {
@@ -150,9 +153,9 @@
 
                     });
             },
-            removeItem(id = null){
-                if(id > 0){
-                    this.$snotify.confirm('Remove #ID:'+id+' ?', 'Confirm deletion', {
+            removeItem(id = null) {
+                if (id > 0) {
+                    this.$snotify.confirm('Remove #ID:' + id + ' ?', 'Confirm deletion', {
                         timeout: 10000,
                         buttons: [
                             {
@@ -164,16 +167,16 @@
                                         .then(({data}) => {
                                             this.page = 1;
                                             this.fetch(1);
-                                    });
+                                        });
 
-                                this.$snotify.remove(toast.id);
+                                    this.$snotify.remove(toast.id);
                                 }
                             },
                             {
                                 text: 'No', action: (toast) => {
-                                console.log('Clicked: No');
-                                this.$snotify.remove(toast.id);
-                            },
+                                    console.log('Clicked: No');
+                                    this.$snotify.remove(toast.id);
+                                },
                                 bold: true
                             },
                         ]
