@@ -76,10 +76,10 @@ class PostController extends Controller
 
             $data['post']= $post->toArray();
 
-       
-            if(!empty($post->image)){
-                $data['post']['image'] = asset($post->image);
-            }
+
+            $data['post']['image'] = $post->getFirstMediaUrl('featured', 'thumb') ?: '';
+
+
         }
 
 
@@ -130,17 +130,8 @@ class PostController extends Controller
                     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                // SET UPLOAD PATH
-                $destinationPath = 'images';
-                // GET THE FILE EXTENSION
-                $extension = $file->getClientOriginalExtension();
-                // RENAME THE UPLOAD WITH RANDOM NUMBER
-                $fileName = rand(11111, 99999) . '.' . $extension;
-                // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
-                $path = $file->move($destinationPath, $fileName);
+                $post->addMediaFromRequest('image')->toMediaCollection('featured');
 
-
-                $post->image = $path;
                 $post->save();
             }
 

@@ -83,9 +83,7 @@ class UsersController extends Controller
 
             $data['item']= $user->toArray();
 
-            if(!empty($user->image)){
-                $data['item']['image'] = asset($user->image);
-            }
+            $data['item']['image'] = $user->getFirstMediaUrl('avatar', 'thumb') ?: '';
         }
 
 
@@ -103,7 +101,7 @@ class UsersController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required',
         ]);
 
         //try to find the ID if post exists or create a new object
@@ -136,24 +134,16 @@ class UsersController extends Controller
 
             $file = $request->image;
 
+            $file = $request->image;
+
             if($file){
 
                 $this->validate($request, [
                     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                // SET UPLOAD PATH
-                $destinationPath = 'users';
-                // GET THE FILE EXTENSION
-                $extension = $file->getClientOriginalExtension();
-                // RENAME THE UPLOAD WITH RANDOM NUMBER
-                $fileName = rand(11111, 99999) . '.' . $extension;
-                // MOVE THE UPLOADED FILES TO THE DESTINATION DIRECTORY
-                $path = $file->move($destinationPath, $fileName);
+                $user->addMediaFromRequest('image')->toMediaCollection('avatar');
 
-
-                $user->image = $path;
-                $user->save();
             }
 
 
@@ -166,7 +156,7 @@ class UsersController extends Controller
         if (!$request->ajax()) return redirect('/');
 
         if(!empty($request->id)){
-            $user = Post::findOrFail($request->id);
+            $user = User::findOrFail($request->id);
             $user->delete();
         }
 

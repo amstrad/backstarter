@@ -17,3 +17,7 @@
 `npm run`
 
 
+### media library docs
+https://docs.spatie.be/laravel-medialibrary/v7/
+
+

@@ -19,6 +19,38 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="name" class="col-3 col-form-label">Lastname</label>
+                                <div class="col-9">
+                                    <input v-model="item.lastname" type="text" class="form-control" id="name"
+                                           placeholder="Lastname">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-3 col-form-label">Username</label>
+                                <div class="col-9">
+                                    <input v-model="item.username" type="text" class="form-control" id="name"
+                                           placeholder="Username">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-3 col-form-label">Mobile</label>
+                                <div class="col-9">
+                                    <input v-model="item.mobile" type="text" class="form-control" id="name"
+                                           placeholder="Mobile">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-3 col-form-label">Email</label>
+                                <div class="col-9">
+                                    <input v-model="item.email" type="text" class="form-control" id="name"
+                                           placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="idrol" class="col-3 col-form-label">Rol</label>
                                 <div class="col-9">
                                     <select id="idrol" class="form-control" v-model="item.idrol">
@@ -66,11 +98,11 @@
 
                             <picture-input
                                     ref="pictureInput"
-                                    width="600"
-                                    height="600"
+                                    width="140"
+                                    height="140"
                                     margin="16"
                                     accept="image/jpeg,image/png"
-                                    size="10"
+                                    size="7"
                                     button-class="btn"
                                     :prefill="item.image"
                                     :custom-strings="{
@@ -140,7 +172,7 @@
                             this.switch = this.item.active == 1 ? true : false;
                         }
 
-                        this.categories = data.categories;
+                        this.roles = data.roles;
 
 
                     });
@@ -152,8 +184,13 @@
 
                 formData.append('id', this.item.id);
                 formData.append('name', this.item.name);
+                formData.append('lastname', this.item.lastname);
+                formData.append('username', this.item.username);
+                formData.append('mobile', this.item.mobile);
+                formData.append('email', this.item.email);
                 formData.append('description', this.item.description);
                 formData.append('active', this.item.active);
+                formData.append('idrol', this.item.idrol);
                 formData.append('idcategory', this.item.idcategory);
 
                 formData.append('image', this.file);
