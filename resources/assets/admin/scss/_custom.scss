@@ -1,0 +1,76 @@
+@import "snotify";
+
+.inline {
+  display: inline-block;
+}
+
+form.app-search .form-control[type=text] {
+  width: 100%;
+  margin-top: 0;
+}
+
+.table tr:hover {
+  opacity: 0.9;
+  transition: all 0.1s;
+}
+
+.pagination {
+  .page-link {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.topbar {
+  z-index: 99999;
+}
+
+//switch
+.vue-js-switch.toggled .v-switch-core {
+  background-color: $success !important;
+}
+
+.vue-js-switch {
+  font-size: 13px !important;
+}
+
+//texteditor
+.quillWrapper {
+  background-color: $white;
+  .ql-editor {
+    color: $dark;
+
+  }
+}
+
+//sidebar
+.user-box .user-img {
+  width: 100px;
+  height: 100px;
+  .rounded-circle {
+    width: 100%;
+    height: 100%;
+    clip-path: circle(60px at center) !important;
+  }
+
+}
+
+//White layout
+.side-menu {
+  .router-link-exact-active {
+    * {
+      color: $success;
+    }
+
+  }
+}
+
+//Dark layout
+.dark_layout {
+  .sidebar_bulb {
+    color: $warning;
+    text-shadow: 0 0 8px #fff;
+  }
+}
+
+

@@ -1,0 +1,35 @@
+/***************
+ ** SONTIFY MODIFIYERS **
+ **************/
+
+.snotify-success {
+  background-color: $success !important;
+}
+
+.snotify-info {
+  background-color: $info !important;
+
+}
+
+.snotify-warning {
+  background-color: $warning !important;
+}
+
+.snotify-error {
+  background-color: $danger !important;
+
+}
+
+.snotify-async {
+  background-color: $primary !important;
+
+}
+
+.snotify-confirm {
+  background-color: $purple !important;
+
+}
+
+.snotify-prompt {
+  background-color: $purple !important;
+}
